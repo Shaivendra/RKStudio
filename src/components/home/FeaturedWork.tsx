@@ -14,14 +14,14 @@ const featuredImages = [
   {
     id: 2,
     src: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b",
-    alt: "Portrait session",
-    category: "Portrait",
+    alt: "Pre-Wedding shoot",
+    category: "Pre-Wedding",
   },
   {
     id: 3,
     src: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
-    alt: "Family photography",
-    category: "Family",
+    alt: "Family event coverage",
+    category: "Family Events",
   },
   {
     id: 4,
@@ -29,15 +29,33 @@ const featuredImages = [
     alt: "Commercial photography",
     category: "Commercial",
   },
+  {
+    id: 5,
+    src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30",
+    alt: "Corporate event",
+    category: "Corporate",
+  },
+  {
+    id: 6,
+    src: "https://images.unsplash.com/photo-1604326531570-2689ea7ae287",
+    alt: "Live event coverage",
+    category: "Live",
+  },
+  {
+    id: 7,
+    src: "https://images.unsplash.com/photo-1578269174936-2709b6aeb913",
+    alt: "Video reels",
+    category: "Reels",
+  },
 ];
 
-const categories = ["All", "Wedding", "Portrait", "Family", "Commercial"];
+const categories = ["All", "Wedding", "Pre-Wedding", "Reels", "Live", "Corporate", "Family Events", "Commercial"];
 
 const FeaturedWork = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   
   const filteredImages = activeCategory === "All" 
-    ? featuredImages 
+    ? featuredImages.slice(0, 4) // Show only 4 items for "All" to keep the grid clean
     : featuredImages.filter(img => img.category === activeCategory);
 
   return (
