@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,6 +13,7 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,12 +22,20 @@ const LoginForm = () => {
     // Simulate login API call
     setTimeout(() => {
       // This is just for demonstration - in a real app, you'd validate with a backend
-      if (email === 'admin@example.com' && password === 'password') {
+      if (email && password) {
+        // Store user data in localStorage to simulate authentication
+        localStorage.setItem('user', JSON.stringify({
+          email: email,
+          isAuthenticated: true
+        }));
+        
         toast({
           title: "Login successful",
           description: "Welcome back!",
         });
-        // Redirect to admin dashboard or home page
+        
+        // Redirect to admin dashboard
+        navigate('/admin');
       } else {
         toast({
           title: "Login failed",
