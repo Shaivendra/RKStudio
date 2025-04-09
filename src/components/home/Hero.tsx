@@ -28,7 +28,7 @@ const Hero = () => {
             </Link>
             <Link to="/booking">
               <Button variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-dark text-lg px-8 py-6 rounded-full">
-                Book a Session
+                Book Now
               </Button>
             </Link>
           </div>
