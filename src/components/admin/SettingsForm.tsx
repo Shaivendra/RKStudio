@@ -17,7 +17,7 @@ export const SettingsForm = () => {
   });
   
   const [siteSettings, setSiteSettings] = useState({
-    siteName: 'ShutterVista Photography',
+    siteName: 'RK Studio Photography',
     siteTagline: 'Capturing Moments, Creating Memories',
     allowBookings: true,
     showPricing: true,
