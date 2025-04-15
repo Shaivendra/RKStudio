@@ -22,7 +22,7 @@ const ContactCTA = () => {
         
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link to="/booking">
-            <Button className="bg-teal text-white hover:bg-teal/90 rounded-full flex items-center text-lg px-8 py-6">
+            <Button className="bg-[#8B5CF6] text-white hover:bg-[#8B5CF6]/90 rounded-full flex items-center text-lg px-8 py-6">
               <CalendarClock className="mr-2 h-5 w-5" /> Book Now
             </Button>
           </Link>

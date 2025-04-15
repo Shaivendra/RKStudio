@@ -22,12 +22,12 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link to="/portfolio">
-              <Button className="btn-primary text-lg px-8 py-6 rounded-full">
+              <Button className="bg-[#8B5CF6] text-white text-lg px-8 py-6 rounded-full hover:bg-[#8B5CF6]/90">
                 View Portfolio <ChevronRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link to="/booking">
-              <Button variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-dark text-lg px-8 py-6 rounded-full">
+              <Button variant="outline" className="border-2 border-[#8B5CF6] text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white text-lg px-8 py-6 rounded-full">
                 Book Now
               </Button>
             </Link>
