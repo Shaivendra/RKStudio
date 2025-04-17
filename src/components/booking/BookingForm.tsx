@@ -6,12 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/components/ui/use-toast';
 import { CalendarIcon, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { supabase } from '@/integrations/supabase/client';
 
 const serviceTypes = [
   {
@@ -68,7 +68,7 @@ const BookingForm = () => {
     setFormData(prev => ({ ...prev, serviceType: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!date) {
@@ -91,13 +91,30 @@ const BookingForm = () => {
     
     setLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Format date for email
+      const formattedDate = format(date, "PPP");
+      
+      // Prepare booking data
+      const bookingData = {
+        ...formData,
+        date: formattedDate,
+        timeSlot: timeSlot,
+      };
+      
+      // Call the Supabase Edge Function to send email
+      const { data, error } = await supabase.functions.invoke('send-booking-email', {
+        body: bookingData,
+      });
+      
+      if (error) {
+        throw new Error(error.message);
+      }
+      
       toast({
         title: "Booking request sent",
         description: "We'll contact you shortly to confirm your booking",
       });
-      setLoading(false);
       
       // Reset form
       setFormData({
@@ -109,7 +126,16 @@ const BookingForm = () => {
       });
       setDate(undefined);
       setTimeSlot(undefined);
-    }, 1500);
+    } catch (error) {
+      console.error("Error sending booking email:", error);
+      toast({
+        title: "Error",
+        description: "There was a problem sending your booking. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
